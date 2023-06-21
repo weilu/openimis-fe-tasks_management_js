@@ -4,6 +4,6 @@ const DEFAULT_CONFIG = {
   "translations": [{ key: "en", messages: messages_en }],
 }
 
-export const TemplateModule = (cfg) => {
+export const TasksManagementModule = (cfg) => {
   return { ...DEFAULT_CONFIG, ...cfg };
 }

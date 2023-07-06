@@ -4,9 +4,9 @@ import { makeStyles } from '@material-ui/styles';
 import _debounce from 'lodash/debounce';
 import { TextInput } from '@openimis/fe-core';
 import {
-  CONTAINS_LOOKUP, DEFAULT_DEBOUNCE_TIME, EMPTY_STRING, GROUP_RESOLVE_POLICY_LIST,
+  CONTAINS_LOOKUP, DEFAULT_DEBOUNCE_TIME, EMPTY_STRING,
 } from '../../constants';
-import StatusPicker from '../../pickers/StatusPicker';
+import GroupPolicyPicker from '../../pickers/GroupPolicyPicker';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -62,9 +62,8 @@ function TaskGroupsFilter({
         />
       </Grid>
       <Grid item xs={3} className={classes.item}>
-        <StatusPicker
+        <GroupPolicyPicker
           label="taskGroup.completionPolicy"
-          constants={GROUP_RESOLVE_POLICY_LIST}
           withLabel
           nullLabel={formatMessage('defaultValue.any')}
           withNull

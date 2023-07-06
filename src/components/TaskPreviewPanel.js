@@ -1,65 +1,51 @@
-import React from 'react';
-import { Paper, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import TaskPreview from './TaskPreviewTable';
+import React, { useState, useEffect } from 'react';
+import { makeStyles, Paper, Typography } from '@material-ui/core';
+import {
+  Contributions, useTranslations,
+  useModulesManager,
+} from '@openimis/fe-core';
+import {
+  BENEFIT_PLAN_TASK_PREVIEW_TABLE_VALUE,
+  BENEFIT_PLAN_UPDATE_STRING, EMPTY_STRING,
+  TASKS_PREVIEW_CONTRIBUTION_KEY,
+} from '../constants';
 
 const useStyles = makeStyles((theme) => ({
   paper: theme.paper.paper,
   title: theme.paper.title,
 }));
 
-const DUMMY_PREVIEW_ITEMS = [
-
-  {
-    id: 1,
-    source: 'Phone',
-    type: 'Support',
-    entity: 'Customer A',
-    assignee: 'John Doe',
-    businessStatus: 'Pending',
-    status: 'RECEIVED',
-    historic: {
-      id: 1,
-      source: 'Email',
-      type: 'Support',
-      entity: 'Customer A',
-      assignee: 'John Doe',
-      businessStatus: 'Pending',
-      status: 'RECEIVED',
-    },
-  },
-  {
-    id: 2,
-    source: 'Phone',
-    type: 'Sales',
-    entity: 'Customer B',
-    assignee: 'Jane Smith',
-    businessStatus: 'Completed',
-    status: 'CLOSED',
-    historic: {
-      id: 2,
-      source: 'Phone',
-      type: 'Sales',
-      entity: 'Customer B',
-      assignee: 'Jane Smith',
-      businessStatus: 'In Progress',
-      status: 'ONGOING',
-    },
-  },
-];
-
-function TaskPreviewPanel({ rights, formatMessage }) {
+function TaskPreviewPanel({
+  rights,
+  edited,
+}) {
+  const modulesManager = useModulesManager();
   const classes = useStyles();
+  const { formatMessage } = useTranslations('tasksManagement', modulesManager);
+  const [taskTable, setTaskTable] = useState(EMPTY_STRING);
+  const task = { ...edited };
 
-  return (
+  useEffect(() => {
+    switch (task?.source) {
+      case BENEFIT_PLAN_UPDATE_STRING:
+        setTaskTable(BENEFIT_PLAN_TASK_PREVIEW_TABLE_VALUE);
+        break;
+      default:
+        setTaskTable(EMPTY_STRING);
+    }
+  }, [task]);
+
+  return taskTable && (
     <Paper className={classes.paper}>
       <Typography className={classes.title}>
         {formatMessage('benefitPlanTask.detailsPage.triage.preview')}
       </Typography>
-      <TaskPreview
+      <Contributions
+        contributionKey={TASKS_PREVIEW_CONTRIBUTION_KEY}
         rights={rights}
+        value={taskTable}
         formatMessage={formatMessage}
-        previewItems={DUMMY_PREVIEW_ITEMS}
+        previewItem={task}
       />
     </Paper>
   );

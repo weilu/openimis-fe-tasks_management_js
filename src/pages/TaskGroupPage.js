@@ -41,13 +41,12 @@ function TaskGroupPage({
     }
   }, [taskGroupUuid]);
 
-  const mandatoryFieldsEmpty = () => !editedTaskGroup?.code
-  || !editedTaskGroup?.completionPolicy || !editedTaskGroup?.executors?.length;
-
-  const doesTaskGroupChange = () => {
-    if (_.isEqual(taskGroup, editedTaskGroup)) return false;
-    return true;
+  const mandatoryFieldsEmpty = () => {
+    const code = editedTaskGroup?.code?.trim();
+    return !code || !editedTaskGroup?.completionPolicy || !editedTaskGroup?.taskexecutorSet?.length;
   };
+
+  const doesTaskGroupChange = () => !_.isEqual(taskGroup, editedTaskGroup);
 
   const canSave = () => !mandatoryFieldsEmpty() && doesTaskGroupChange();
 
@@ -105,14 +104,7 @@ function TaskGroupPage({
   });
 
   useEffect(() => {
-    const storedTaskGroup = { ...taskGroup };
-    const currentExecutors = storedTaskGroup?.taskexecutorSet?.edges?.map((executor) => executor.node.user);
-
-    delete storedTaskGroup.taskexecutorSet;
-
-    const formattedTaskGroup = { ...storedTaskGroup, executors: currentExecutors };
-
-    setEditedTaskGroup(formattedTaskGroup);
+    setEditedTaskGroup(taskGroup);
   }, [taskGroup]);
 
   useEffect(() => () => dispatch(clearTaskGroup()), []);

@@ -12,23 +12,27 @@ In development mode, you can use `npm link` and `npm start` to continuously scan
 
 ## Main Menu Contributions
 
-**Tasks** (task.menu.tasks key), displayed if user has the right `191001`
+**Tasks** (tasksManagement.menu.tasksMainMenu key), displayed to all users
+Under Admin menu **Task Executioner Groups** (tasksManagement.menu.taskExecutionerGroups) if user has the right `191001`
 
 ## Other Contributions
 
 * `core.Router`: registering `tasks`, `task`, `taskGroups`, `taskGroup`, routes in openIMIS client-side router
 
 ## Available Contribution Points
+* `tasksManagement.taskPreview` allows to add tables that would be suitable for task's enitity subject
 
 ## Dispatched Redux Actions
 
-* `SEARCH_TASK_GROUPS: 'TASK_MANAGEMENT_TASK_GROUPS_{REQ|RESP|ERR}'`
+* `MUTATION`: 'TASK_MANAGEMENT_MUTATION',
+* `SEARCH_TASK_GROUPS: 'TASK_MANAGEMENT_TASK_GROUPS_{REQ|ERR}'`
 * `GET_TASK_GROUP: 'TASK_MANAGEMENT_TASK_GROUP_{REQ|RESP|ERR}_{REQ|RESP|ERR}'`
 * `CREATE_TASK_GROUP: 'TASK_MANAGEMENT_CREATE_TASK_GROUP_{REQ|RESP|ERR}'`
-* `UPDATE_TASK_GROUP: 'TASK_MANAGEMENT_UPDATE_TASK_GROUP_{REQ|RESP|ERR}'`
-* `DELETE_TASK_GROUP: 'TASK_MANAGEMENT_DELETE_TASK_GROUP_{REQ|RESP|ERR}'`
+* `UPDATE_TASK_GROUP: 'TASK_MANAGEMENT_UPDATE_TASK_GROUP_RESP'`
+* `DELETE_TASK_GROUP: 'TASK_MANAGEMENT_DELETE_TASK_GROUP_RESP'`
 * `GET_TASK: 'TASK_MANAGEMENT_TASK_{REQ|RESP|ERR}'`
-* `UPDATE_TASK: 'TASK_MANAGEMENT_UPDATE_TASK_{REQ|RESP|ERR}'`
+* `UPDATE_TASK: 'TASK_MANAGEMENT_UPDATE_TASK_RESP'`
+* `RESOLVE_TASK: 'TASK_MANAGEMENT_RESOLVE_TASK_RESP'`
 
 ## Other Modules Listened Redux Actions
 * `state.core.user`, to access user info (rights,...)

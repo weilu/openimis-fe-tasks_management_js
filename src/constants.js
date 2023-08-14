@@ -56,11 +56,11 @@ export const TASK_UPDATE = 191003;
 
 export const RIGHT_TASK_EXECUTIONER_GROUPS = 190001;
 
-export const TASKS_PREVIEW_CONTRIBUTION_KEY = 'tasksManagement.taskPreview';
-
-export const BENEFIT_PLAN_TASK_PREVIEW_TABLE_VALUE = 'BenefitPlanTaskPreviewTable';
-
-export const BENEFIT_PLAN_UPDATE_STRING = 'Benefit Plan Update';
+export const TASK_CONTRIBUTION_KEY = 'tasksManagement.tasks';
 
 export const APPROVED = 'APPROVED';
 export const FAILED = 'FAILED';
+
+export const DOT = '.';
+
+export const TASK_ROUTE = 'tasksManagement.route.task';

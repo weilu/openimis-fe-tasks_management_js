@@ -1,51 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, Paper, Typography } from '@material-ui/core';
-import {
-  Contributions, useTranslations,
-  useModulesManager,
-} from '@openimis/fe-core';
-import {
-  BENEFIT_PLAN_TASK_PREVIEW_TABLE_VALUE,
-  BENEFIT_PLAN_UPDATE_STRING, EMPTY_STRING,
-  TASKS_PREVIEW_CONTRIBUTION_KEY,
-} from '../constants';
+import { useModulesManager } from '@openimis/fe-core';
+import { EMPTY_STRING, TASK_CONTRIBUTION_KEY } from '../constants';
+import TaskPreviewTable from './TaskPreviewTable';
 
 const useStyles = makeStyles((theme) => ({
   paper: theme.paper.paper,
   title: theme.paper.title,
 }));
 
-function TaskPreviewPanel({
-  rights,
-  edited,
-}) {
+function TaskPreviewPanel({ rights, edited }) {
   const modulesManager = useModulesManager();
   const classes = useStyles();
-  const { formatMessage } = useTranslations('tasksManagement', modulesManager);
-  const [taskTable, setTaskTable] = useState(EMPTY_STRING);
+  const [header, setHeader] = useState(EMPTY_STRING);
+  const [tableTaskHeaders, setTableTaskHeaders] = useState([]);
+  const [taskItemFormatters, setTaskItemFormatters] = useState([]);
   const task = { ...edited };
 
   useEffect(() => {
-    switch (task?.source) {
-      case BENEFIT_PLAN_UPDATE_STRING:
-        setTaskTable(BENEFIT_PLAN_TASK_PREVIEW_TABLE_VALUE);
-        break;
-      default:
-        setTaskTable(EMPTY_STRING);
-    }
-  }, [task]);
+    if (task.source) {
+      const contrib = modulesManager.getContribs(TASK_CONTRIBUTION_KEY)
+        .find((c) => c.taskSource.includes(task.source));
 
-  return taskTable && (
+      if (contrib) {
+        const { tableHeaders, itemFormatters, text } = contrib;
+        setHeader(text);
+        setTableTaskHeaders(tableHeaders);
+        setTaskItemFormatters(itemFormatters);
+      }
+    }
+  }, [task.source]);
+
+  return (
     <Paper className={classes.paper}>
       <Typography className={classes.title}>
-        {formatMessage('benefitPlanTask.detailsPage.triage.preview')}
+        {header}
       </Typography>
-      <Contributions
-        contributionKey={TASKS_PREVIEW_CONTRIBUTION_KEY}
+      <TaskPreviewTable
         rights={rights}
-        value={taskTable}
-        formatMessage={formatMessage}
         previewItem={task}
+        tableHeaders={tableTaskHeaders}
+        itemFormatters={taskItemFormatters}
       />
     </Paper>
   );

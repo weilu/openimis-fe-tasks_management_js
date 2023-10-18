@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,7 +13,7 @@ import _ from 'lodash';
 import TaskHeadPanel from '../components/TaskHeadPanel';
 import TaskPreviewPanel from '../components/TaskPreviewPanel';
 import TaskApprovementPanel from '../components/TaskApprovementPanel';
-import { fetchTask, updateTask } from '../actions';
+import { clearTask, fetchTask, updateTask } from '../actions';
 import { TASK_STATUS as taskStatus } from '../constants';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,27 +27,40 @@ function TaskDetailsPage({
   fetchTask,
   updateTask,
   currentUser,
+  submittingMutation,
+  mutation,
+  clearTask,
 }) {
   const modulesManager = useModulesManager();
   const classes = useStyles();
   const history = useHistory();
   const { formatMessage } = useTranslations('tasksManagement', modulesManager);
   const [editedTask, setEditedTask] = useState({});
-  const [isSaved, setIsSaved] = useState(false);
+  const submittingMutationRef = useRef();
   const back = () => history.goBack();
 
   useEffect(() => {
     if (taskUuid) {
       fetchTask(modulesManager, [`id: "${taskUuid}"`]);
-      setIsSaved(false);
     }
-  }, [taskUuid, isSaved]);
+  }, [taskUuid]);
+
+  useEffect(() => {
+    if (submittingMutationRef.current && !submittingMutation && mutation?.clientMutationId) {
+      fetchTask(modulesManager, [`clientMutationId: "${mutation.clientMutationId}"`]);
+    }
+    submittingMutationRef.current = submittingMutation;
+  }, [submittingMutation]);
 
   useEffect(() => {
     if (task) {
       setEditedTask(task);
     }
   }, [task]);
+
+  useEffect(() => () => {
+    clearTask();
+  }, []);
 
   const doesTaskChange = () => {
     if (_.isEqual(task, editedTask)) return false;
@@ -64,7 +77,6 @@ function TaskDetailsPage({
         editedTask,
         formatMessage('task.update.mutationLabel'),
       );
-      setIsSaved(true);
     }
   };
 
@@ -98,7 +110,6 @@ function TaskDetailsPage({
         HeadPanel={TaskHeadPanel}
         formatMessage={formatMessage}
         Panels={panels()}
-        setIsSaved={setIsSaved}
         rights={rights}
         saveTooltip={formatMessage(
           `tasksManagement.saveButton.tooltip.${canSave() ? 'enabled' : 'disabled'}`,
@@ -111,13 +122,19 @@ function TaskDetailsPage({
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   fetchTask,
   updateTask,
+  clearTask,
 }, dispatch);
 
 const mapStateToProps = (state, props) => ({
   rights: !!state.core && !!state.core.user && !!state.core.user.i_user ? state.core.user.i_user.rights : [],
   currentUser: !!state.core && !!state?.core?.user ? state.core.user : null,
   taskUuid: props.match.params.task_uuid,
+  submittingMutation: state.tasksManagement.submittingMutation,
+  mutation: state.tasksManagement.mutation,
   task: state.tasksManagement.task,
+  fetchingTask: state.tasksManagement.fetchingTask,
+  fetchedTask: state.tasksManagement.fetchedTask,
+  errorTask: state.tasksManagement.errorTask,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskDetailsPage);

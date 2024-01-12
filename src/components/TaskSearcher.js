@@ -17,7 +17,7 @@ import { fetchTasks } from '../actions';
 import trimBusinessEvent from '../utils/trimBusinessEvent';
 
 function TaskSearcher({
-  rights, contribution,
+  rights, contribution, entityId,
 }) {
   const history = useHistory();
   const modulesManager = useModulesManager();
@@ -88,16 +88,25 @@ function TaskSearcher({
     ),
   ];
 
-  const defaultFilters = () => ({
-    isDeleted: {
-      value: false,
-      filter: 'isDeleted: false',
-    },
-    source: {
-      value: contribution.taskSource,
-      filter: `source: "${contribution.taskSource}"`,
-    },
-  });
+  const defaultFilters = () => {
+    const filters = {
+      isDeleted: {
+        value: false,
+        filter: 'isDeleted: false',
+      },
+      source: {
+        value: contribution.taskSource,
+        filter: `source: "${contribution.taskSource}"`,
+      },
+    };
+    if (entityId !== null && entityId !== undefined) {
+      filters.entityId = {
+        value: entityId,
+        filter: `entityId: "${entityId}"`,
+      };
+    }
+    return filters;
+  };
 
   const taskFilter = (props) => (
     <TaskFilter

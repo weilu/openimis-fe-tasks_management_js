@@ -12,6 +12,7 @@ import TaskGroupPage from './pages/TaskGroupPage';
 import TaskStatusPicker from './pickers/TaskStatusPicker';
 import TaskPreviewCell from './components/TaskPreviewCell';
 import TaskGroupPicker from './pickers/TaskGroupPicker';
+import TaskSearcher from './components/TaskSearcher';
 import getAdminMainMenuContributions from './contributions/AdminMainMenuContributions';
 import { TASK_ROUTE } from './constants';
 
@@ -38,6 +39,7 @@ const DEFAULT_CONFIG = {
     { key: 'tasksManagement.taskStatusPicker', ref: TaskStatusPicker },
     { key: 'tasksManagement.taskPreviewCell', ref: TaskPreviewCell },
     { key: 'tasksManagement.taskGroupPicker', ref: TaskGroupPicker },
+    { key: 'tasksManagement.taskSearcher', ref: TaskSearcher },
   ],
 };
 

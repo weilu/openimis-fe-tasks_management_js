@@ -2,14 +2,15 @@ import React from 'react';
 import { HYPHEN } from '../constants';
 
 function TaskPreviewCell({
-  formatterIndex, itemData, incomingData, formatter, jsonExt,
+  formatterIndex, itemData, incomingData, formatter, jsonExt, setAdditionalData,
 }) {
   const showHistorical = (itemIncomingData) => {
-    if (formatter(itemData, jsonExt, formatterIndex) === formatter(itemIncomingData, jsonExt, formatterIndex)
-        || !formatter(itemIncomingData, jsonExt, formatterIndex)) {
+    if (formatter(itemData, jsonExt, formatterIndex, setAdditionalData)
+        === formatter(itemIncomingData, jsonExt, formatterIndex, setAdditionalData)
+        || !formatter(itemIncomingData, jsonExt, formatterIndex, setAdditionalData)) {
       return HYPHEN;
     }
-    return formatter(itemIncomingData, jsonExt, formatterIndex);
+    return formatter(itemIncomingData, jsonExt, formatterIndex, setAdditionalData);
   };
 
   const shouldDisplay = (value) => {
@@ -21,7 +22,7 @@ function TaskPreviewCell({
     <>
       {(shouldDisplay(itemData) || shouldDisplay(jsonExt)) && (
         <p>
-          {formatter(itemData, jsonExt, formatterIndex) ?? HYPHEN}
+          {formatter(itemData, jsonExt, formatterIndex, setAdditionalData) ?? HYPHEN}
         </p>
       )}
       {shouldDisplay(incomingData) && (

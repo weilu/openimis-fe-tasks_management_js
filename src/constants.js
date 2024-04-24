@@ -66,3 +66,29 @@ export const FAILED = 'FAILED';
 export const DOT = '.';
 
 export const TASK_ROUTE = 'tasksManagement.route.task';
+
+export const TASK_AVAILABLE_SOURCES = [
+  'IndividualService',
+  'GroupIndividualService',
+  'CreateGroupAndMoveIndividualService',
+  'BenefitPlanService',
+  'BeneficiaryService',
+  'calcrule_social_protection',
+  'import_valid_items',
+  'payroll',
+  'payroll_reconciliation',
+  'payroll_reject',
+  'payroll_delete',
+  'CreateDeduplicationReviewTasksService',
+];
+
+export const TASK_AVAILABLE_TYPES = [
+  'create',
+  'update',
+  'calculate',
+  'import_valid_items',
+  'accept_payroll',
+  'payroll_reconciliation',
+  'payroll_reject',
+  'payroll_delete',
+];

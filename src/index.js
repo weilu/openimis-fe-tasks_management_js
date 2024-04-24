@@ -17,6 +17,8 @@ import getAdminMainMenuContributions from './contributions/AdminMainMenuContribu
 import { TASK_ROUTE } from './constants';
 import { fetchTask, resolveTask } from './actions';
 import TasksAllPage from './pages/TasksAllPage';
+import TaskTypesPicker from './pickers/TaskTypesPicker';
+import TaskSourcesPicker from './pickers/TaskSourcesPicker';
 
 const ROUTE_TASKS_MANAGEMENT = 'tasks';
 const ROUTE_TASK_MANAGEMENT = 'tasks/task';
@@ -41,6 +43,8 @@ const DEFAULT_CONFIG = {
     { key: TASK_ROUTE, ref: ROUTE_TASK_MANAGEMENT },
     { key: 'tasksManagement.route.group', ref: ROUTE_GROUP_MANAGEMENT },
     { key: 'tasksManagement.taskStatusPicker', ref: TaskStatusPicker },
+    { key: 'tasksManagement.taskTypesPicker', ref: TaskTypesPicker },
+    { key: 'tasksManagement.taskSourcesPicker', ref: TaskSourcesPicker },
     { key: 'tasksManagement.taskPreviewCell', ref: TaskPreviewCell },
     { key: 'tasksManagement.taskGroupPicker', ref: TaskGroupPicker },
     { key: 'tasksManagement.taskSearcher', ref: TaskSearcher },

@@ -43,18 +43,30 @@ function TaskAllFilter({
   return (
     <Grid container className={classes.form}>
       <Grid item xs={3} className={classes.item}>
-        <TextInput
+        <PublishedComponent
+          pubRef="tasksManagement.taskSourcesPicker"
           module={MODULE_NAME}
-          label="task.source"
-          value={filterTextFieldValue('source')}
-          onChange={onChangeStringFilter('source', CONTAINS_LOOKUP)}
+          withLabel
+          nullLabel={formatMessage(intl, MODULE_NAME, 'any')}
+          withNull
+          value={filterValue('source')}
+          onChange={(value) => onChangeFilters([
+            {
+              id: 'source',
+              value,
+              filter: value ? `source: "${value}"` : EMPTY_STRING,
+            },
+          ])}
         />
       </Grid>
       <Grid item xs={3} className={classes.item}>
-        <TextInput
+        <PublishedComponent
+          pubRef="tasksManagement.taskTypesPicker"
           module={MODULE_NAME}
-          label="task.type"
-          value={filterTextFieldValue('businessEvent')}
+          withLabel
+          nullLabel={formatMessage(intl, MODULE_NAME, 'any')}
+          withNull
+          value={filterValue('businessEvent')}
           onChange={onChangeStringFilter('businessEvent', CONTAINS_LOOKUP)}
         />
       </Grid>

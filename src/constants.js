@@ -45,6 +45,7 @@ export const TASK_STATUS_LIST = [
 export const GROUP_RESOLVE_POLICY_LIST = [GROUP_RESOLVE_POLICY.ALL, GROUP_RESOLVE_POLICY.ANY, GROUP_RESOLVE_POLICY.N];
 
 export const RIGHT_TASKS_MANAGEMENT_SEARCH = 191001;
+export const RIGHT_TASKS_MANAGEMENT_SEARCH_ALL = 191005;
 
 export const TASKS_MANAGEMENT_ROUTE_GROUPS_GROUP = 'tasksManagement.route.group';
 
@@ -65,3 +66,29 @@ export const FAILED = 'FAILED';
 export const DOT = '.';
 
 export const TASK_ROUTE = 'tasksManagement.route.task';
+
+export const TASK_AVAILABLE_SOURCES = [
+  'IndividualService',
+  'GroupIndividualService',
+  'CreateGroupAndMoveIndividualService',
+  'BenefitPlanService',
+  'BeneficiaryService',
+  'calcrule_social_protection',
+  'import_valid_items',
+  'payroll',
+  'payroll_reconciliation',
+  'payroll_reject',
+  'payroll_delete',
+  'CreateDeduplicationReviewTasksService',
+];
+
+export const TASK_AVAILABLE_TYPES = [
+  'create',
+  'update',
+  'calculate',
+  'import_valid_items',
+  'accept_payroll',
+  'payroll_reconciliation',
+  'payroll_reject',
+  'payroll_delete',
+];

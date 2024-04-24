@@ -52,5 +52,6 @@
   "tasksManagement.task.resolve.confirm.fail.message": "Are you sure you want to fail this task?",
   "tasksManagement.menu.taskExecutionerGroups": "Task Executioner Groups",
   "tasksManagement.TaskSourcePicker.label": "Task Sources",
-  "tasksManagement.TaskSourcePicker.placeholder": "Search for task sources..."
+  "tasksManagement.TaskSourcePicker.placeholder": "Search for task sources...",
+  "tasksManagement.entries.tasksManagementAllView": "All Tasks"
 }

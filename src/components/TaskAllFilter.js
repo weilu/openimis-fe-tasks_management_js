@@ -97,7 +97,7 @@ function TaskAllFilter({
           ])}
         />
       </Grid>
-      <Grid item xs={2} className={classes.item}>
+      <Grid item xs={3} className={classes.item}>
         <PublishedComponent
           pubRef="core.DatePicker"
           module={MODULE_NAME}
@@ -112,7 +112,7 @@ function TaskAllFilter({
           ])}
         />
       </Grid>
-      <Grid item xs={2} className={classes.item}>
+      <Grid item xs={3} className={classes.item}>
         <PublishedComponent
           pubRef="core.DatePicker"
           module={MODULE_NAME}

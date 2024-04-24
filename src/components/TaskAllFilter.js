@@ -48,14 +48,13 @@ function TaskAllFilter({
           label="task.source"
           value={filterTextFieldValue('source')}
           onChange={onChangeStringFilter('source', CONTAINS_LOOKUP)}
-          readOnly
         />
       </Grid>
       <Grid item xs={3} className={classes.item}>
         <TextInput
           module={MODULE_NAME}
           label="task.type"
-          value={filterTextFieldValue('type')}
+          value={filterTextFieldValue('businessEvent')}
           onChange={onChangeStringFilter('businessEvent', CONTAINS_LOOKUP)}
         />
       </Grid>
@@ -63,7 +62,7 @@ function TaskAllFilter({
         <TextInput
           module={MODULE_NAME}
           label="task.entity"
-          value={filterTextFieldValue('entity')}
+          value={filterTextFieldValue('entityString')}
           onChange={onChangeStringFilter('entityString', CONTAINS_LOOKUP)}
         />
       </Grid>

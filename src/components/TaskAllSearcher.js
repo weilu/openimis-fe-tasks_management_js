@@ -12,7 +12,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import {
   RIGHT_TASKS_MANAGEMENT_SEARCH, DEFAULT_PAGE_SIZE, ROWS_PER_PAGE_OPTIONS, TASK_STATUS, TASK_ROUTE,
 } from '../constants';
-import TaskFilter from './TaskFilter';
+import TaskAllFilter from './TaskAllFilter';
 import { fetchTasks } from '../actions';
 import trimBusinessEvent from '../utils/trimBusinessEvent';
 
@@ -103,7 +103,7 @@ function TaskAllSearcher({
   };
 
   const taskFilter = (props) => (
-    <TaskFilter
+    <TaskAllFilter
       intl={props.intl}
       classes={props.classes}
       filters={props.filters}

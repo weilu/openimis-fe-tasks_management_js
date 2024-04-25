@@ -71,7 +71,7 @@
   "tasksManagement.task.type.update": "Update",
   "tasksManagement.task.type.calculate": "Calculate",
   "tasksManagement.task.type.import_valid_items": "Import Valid Items",
-  "tasksManagement.task.type.accept_payroll": "Reject Payroll",
+  "tasksManagement.task.type.accept_payroll": "Accept Payroll",
   "tasksManagement.task.type.payroll_reconciliation": "Payroll Reconciliation",
   "tasksManagement.task.type.payroll_reject": "Reject Payroll",
   "tasksManagement.task.type.payroll_delete": "Delete Payroll"

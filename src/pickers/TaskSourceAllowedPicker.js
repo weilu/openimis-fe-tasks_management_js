@@ -6,18 +6,17 @@ import {
 } from '@openimis/fe-core';
 import { TASK_CONTRIBUTION_KEY } from '../constants';
 
-function TaskSourcePicker({
+function TaskSourceAllowedPicker({
   onChange,
   readOnly,
   required,
   withLabel,
   value,
-  filterOptions
 }) {
   const modulesManager = useModulesManager();
   const { formatMessage } = useTranslations('tasksManagement');
   const contributions = modulesManager.getContribs(TASK_CONTRIBUTION_KEY);
-  const sources = contributions.flatMap((contribution) => {
+  const allowedSources = contributions.flatMap((contribution) => {
     const source = contribution.taskSource;
     return source ? source.map((item) => ({ id: item, name: item })) : [];
   });
@@ -26,19 +25,19 @@ function TaskSourcePicker({
     <Autocomplete
       multiple
       required={required}
-      label={formatMessage('TaskSourcePicker.label')}
-      placeholder={formatMessage('TaskSourcePicker.placeholder')}
+      label={formatMessage('TaskSourceAllowedPicker.label')}
+      placeholder={formatMessage('TaskSourceAllowedPicker.placeholder')}
       readOnly={readOnly}
       withLabel={withLabel}
       withPlaceholder={!value?.length}
-      options={sources}
+      options={allowedSources}
       value={value}
       getOptionLabel={(source) => `${source.name}`}
       onChange={onChange}
-      filterOptions={filterOptions}
+      filterSelectedOptions
       onInputChange={() => {}}
     />
   );
 }
 
-export default TaskSourcePicker;
+export default TaskSourceAllowedPicker;

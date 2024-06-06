@@ -17,7 +17,7 @@ const TASK_GROUP_PROJECTION = () => [
   'code',
   'completionPolicy',
   'taskexecutorSet { edges { node { user { id username lastName } } } }',
-  'taskAllowedSources'
+  'taskAllowedSources',
 ];
 
 const TASK_FULL_PROJECTION = () => [

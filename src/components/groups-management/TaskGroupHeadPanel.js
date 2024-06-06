@@ -50,11 +50,11 @@ class TaskGroupHeadPanel extends FormPanel {
     const taskGroup = { ...edited };
     const { rights } = this.props;
     const filterAllowedSources = (options) => {
-      if (!taskGroup?.taskAllowedSources?.length){
-        return options
+      if (!taskGroup?.taskAllowedSources?.length) {
+        return options;
       }
-      const sourcesIds = taskGroup.taskAllowedSources.map((source)=>source.id)
-      return options.filter((option)=>!sourcesIds.includes(option.id))   
+      const sourcesIds = taskGroup.taskAllowedSources.map((source) => source.id);
+      return options.filter((option) => sourcesIds.includes(option.id));
     }
     return (
       <>

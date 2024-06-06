@@ -1,11 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import {
-  useModulesManager,
-  useTranslations,
-  Autocomplete,
-  useGraphqlQuery,
-} from '@openimis/fe-core';
+import { useModulesManager, useTranslations, Autocomplete, useGraphqlQuery } from "@openimis/fe-core";
 
 function TaskGroupPicker(props) {
   const {
@@ -16,6 +11,7 @@ function TaskGroupPicker(props) {
     withPlaceholder,
     value,
     label,
+    source = null,
     filterOptions,
     filterSelectedOptions,
     placeholder,
@@ -23,8 +19,8 @@ function TaskGroupPicker(props) {
   } = props;
 
   const modulesManager = useModulesManager();
-  const { formatMessage } = useTranslations('claim', modulesManager);
-  const [searchString, setSearchString] = useState('');
+  const { formatMessage } = useTranslations("claim", modulesManager);
+  const [searchString, setSearchString] = useState("");
 
   const { isLoading, data, error } = useGraphqlQuery(
     `
@@ -35,6 +31,7 @@ function TaskGroupPicker(props) {
                       id
                       code
                       completionPolicy
+                      taskAllowedSources
                     }
                 }
             }
@@ -45,17 +42,27 @@ function TaskGroupPicker(props) {
     },
   );
 
+  const options = data?.taskGroup?.edges.map((edge) => edge.node) ?? [];
+
+  const filteredOptionsWithAllowedSources = options.filter((option) => {
+    const parsedResponse = JSON.parse(option.taskAllowedSources);
+    const allowedSources = typeof parsedResponse === "object" ? [parsedResponse] : parsedResponse;
+    const usersAllowedSources = allowedSources.flatMap((source) => source.task_allowed_sources);
+
+    return usersAllowedSources.includes(source);
+  });
+
   return (
     <Autocomplete
       multiple={multiple}
       required={required}
-      placeholder={placeholder ?? formatMessage('tasksManagement.taskGroup.placeholder')}
-      label={label ?? formatMessage('tasksManagement.task.assignee')}
+      placeholder={placeholder ?? formatMessage("tasksManagement.taskGroup.placeholder")}
+      label={label ?? formatMessage("tasksManagement.task.assignee")}
       error={error}
       withLabel={withLabel}
       withPlaceholder={withPlaceholder}
       readOnly={readOnly}
-      options={data?.taskGroup?.edges.map((edge) => edge.node) ?? []}
+      options={filteredOptionsWithAllowedSources}
       isLoading={isLoading}
       value={value}
       getOptionLabel={(option) => `${option.code}`}

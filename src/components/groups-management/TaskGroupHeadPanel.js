@@ -55,7 +55,7 @@ class TaskGroupHeadPanel extends FormPanel {
       }
       const sourcesIds = taskGroup.taskAllowedSources.map((source) => source.id);
       return options.filter((option) => sourcesIds.includes(option.id));
-    }
+    };
     return (
       <>
         {renderHeadPanelTitle(classes)}

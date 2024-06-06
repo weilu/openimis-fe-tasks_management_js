@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { useModulesManager, useTranslations, Autocomplete, useGraphqlQuery } from "@openimis/fe-core";
+import { 
+  useModulesManager, useTranslations, Autocomplete, useGraphqlQuery 
+} from '@openimis/fe-core';
 
 function TaskGroupPicker(props) {
   const {
@@ -19,8 +21,8 @@ function TaskGroupPicker(props) {
   } = props;
 
   const modulesManager = useModulesManager();
-  const { formatMessage } = useTranslations("claim", modulesManager);
-  const [searchString, setSearchString] = useState("");
+  const { formatMessage } = useTranslations('claim', modulesManager);
+  const [searchString, setSearchString] = useState('');
 
   const { isLoading, data, error } = useGraphqlQuery(
     `
@@ -46,7 +48,7 @@ function TaskGroupPicker(props) {
 
   const filteredOptionsWithAllowedSources = options.filter((option) => {
     const parsedResponse = JSON.parse(option.taskAllowedSources);
-    const allowedSources = typeof parsedResponse === "object" ? [parsedResponse] : parsedResponse;
+    const allowedSources = typeof parsedResponse === 'object' ? [parsedResponse] : parsedResponse;
     const usersAllowedSources = allowedSources.flatMap((source) => source.task_allowed_sources);
 
     return usersAllowedSources.includes(source);
@@ -56,8 +58,8 @@ function TaskGroupPicker(props) {
     <Autocomplete
       multiple={multiple}
       required={required}
-      placeholder={placeholder ?? formatMessage("tasksManagement.taskGroup.placeholder")}
-      label={label ?? formatMessage("tasksManagement.task.assignee")}
+      placeholder={placeholder ?? formatMessage('tasksManagement.taskGroup.placeholder')}
+      label={label ?? formatMessage('tasksManagement.task.assignee')}
       error={error}
       withLabel={withLabel}
       withPlaceholder={withPlaceholder}

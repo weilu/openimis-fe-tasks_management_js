@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import { 
-  useModulesManager, useTranslations, Autocomplete, useGraphqlQuery 
+import {
+  useModulesManager, useTranslations, Autocomplete, useGraphqlQuery,
 } from '@openimis/fe-core';
 
 function TaskGroupPicker(props) {

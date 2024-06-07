@@ -12,7 +12,7 @@ function TaskSourcePicker({
   required,
   withLabel,
   value,
-  filterOptions
+  filterOptions,
 }) {
   const modulesManager = useModulesManager();
   const { formatMessage } = useTranslations('tasksManagement');

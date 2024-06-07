@@ -45,7 +45,7 @@ const renderHeadPanelTitle = (classes) => (
 class TaskGroupHeadPanel extends FormPanel {
   render() {
     const {
-      edited, classes, readOnly, rights
+      edited, classes, readOnly, rights,
     } = this.props;
     const taskGroup = { ...edited };
     const filterAllowedSources = (options) => {

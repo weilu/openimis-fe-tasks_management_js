@@ -3,7 +3,7 @@ import { Autocomplete, useTranslations, useModulesManager } from '@openimis/fe-c
 import { TASK_CONTRIBUTION_KEY } from '../constants';
 
 function TaskSourceAllowedPicker({
-  onChange, readOnly, required, withLabel, value
+  onChange, readOnly, required, withLabel, value,
 }) {
   const modulesManager = useModulesManager();
   const { formatMessage } = useTranslations('tasksManagement');

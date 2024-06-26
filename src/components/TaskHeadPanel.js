@@ -89,6 +89,7 @@ class TaskHeadPanel extends FormPanel {
               readOnly={!rights.includes(TASK_UPDATE)
                 || [TASK_STATUS.COMPLETED, TASK_STATUS.FAILED].includes(task.status)}
               withNull
+              source={task?.source}
               value={task?.taskGroup}
               onChange={(taskGroup) => this.updateAttribute('taskGroup', taskGroup)}
             />
